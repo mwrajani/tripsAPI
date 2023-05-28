@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "API Listening" });
+  res.json({ message: "API Listeninggg" });
 });
 
 app.post("/api/trips", (req, res) => {
