@@ -44,7 +44,7 @@ app.get("/api/trips", (req, res) => {
 
 app.get("/api/trips/:id", (req, res) => {
   db.getTripById(req.params.id)
-    .then((data) => {
+    .then(data => {
       data ? res.json(data) : res.status(404).json({ message: "Resource not found" });
     })
     .catch((err) => {
