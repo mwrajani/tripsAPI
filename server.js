@@ -1,3 +1,14 @@
+/*********************************************************************************
+*  WEB422 – Assignment 1
+*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: Muhammad Wajih Rajani Student ID: 142199207 Date: 19 / May / 2023
+*  Cyclic Link: https://alert-plum-cape-buffalo.cyclic.app/
+*
+********************************************************************************/ 
+
 const HTTP_PORT = process.env.PORT || 8080;
 const express = require("express");
 const cors = require("cors");
