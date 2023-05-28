@@ -24,8 +24,7 @@ app.post("/api/trips", (req, res) => {
 app.get("/api/trips", (req, res) => {
   const page = req.query.page || 0;
   const perPage = req.query.perPage || 0;
-  const title = req.query.title;
-  db.getAllTrips(page, perPage, title)
+  db.getAllTrips(page, perPage)
     .then(data => res.json(data))
     .catch((err) => {
       res.status(500).json(err);
