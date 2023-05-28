@@ -3,14 +3,14 @@ const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
 const app = express();
-const TripsDB = require("./modules/tripsDB.js");
-const db = new TripsDB();
+const tripsDB = require("./modules/tripsDB.js");
+const db = new tripsDB();
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "API Listeninggg" });
+  res.json({ message: "API Listening" });
 });
 
 app.post("/api/trips", (req, res) => {
@@ -22,9 +22,9 @@ app.post("/api/trips", (req, res) => {
 });
 
 app.get("/api/trips", (req, res) => {
-  let page = req.query.page ? req.query.page : 0;
-  let perPage = req.query.perPage ? req.query.perPage : 0;
-  let title = req.query.title;
+  const page = req.query.page || 0;
+  const perPage = req.query.perPage || 0;
+  const title = req.query.title;
   db.getAllTrips(page, perPage, title)
     .then(data => res.json(data))
     .catch((err) => {
@@ -34,31 +34,35 @@ app.get("/api/trips", (req, res) => {
 
 app.get("/api/trips/:id", (req, res) => {
   db.getTripById(req.params.id)
-    .then((movie) => {
-      movie ? res.json(movie) : res.status(404).json({ "message": "Resource not found" });
+    .then((data) => {
+      data ? res.json(data) : res.status(404).json({ message: "Resource not found" });
     })
     .catch((err) => {
-      res.status(500).json({ "message": "Server internal error" });
+      res.status(500).json({ message: "Server internal error" });
     });
 });
 
 app.put("/api/trips/:id", (req, res) => {
   if (req.body.id && req.params.id !== req.body.id) {
-    res.status(400).json({ "message": "IDs not match" });
+    res.status(400).json({ message: "IDs do not match" });
   } else {
     db.updateTripById(req.body, req.params.id)
-      .then(() => { res.json({ "message": "The object updated" }) })
+      .then(() => {
+        res.json({ message: "The object updated" });
+      })
       .catch((err) => {
-        res.status(500).json({ "message": "Server internal error" });
+        res.status(500).json({ message: "Server internal error" });
       });
   }
 });
 
 app.delete("/api/trips/:id", (req, res) => {
   db.deleteTripById(req.params.id)
-    .then(() => { res.json() })
+    .then(() => {
+      res.json();
+    })
     .catch((err) => {
-      res.status(500).json({ "message": "Server internal error" });
+      res.status(500).json({ message: "Server internal error" });
     });
   res.status(204).end();
 });
