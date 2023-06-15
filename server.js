@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "API Listening" });
+  res.json({ message: "API Listeningg" });
 });
 
 app.post("/api/trips", (req, res) => {
